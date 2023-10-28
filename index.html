@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Foundation Reinforcement Learning: towards Embodied Generalist Agents with Foundation Prior Assistance.">
+  <meta name="keywords" content="Reinforcement Learning, Foundation Models, Vision-Language Models">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foundation Reinforcement Learning: towards Embodied Generalist Agents with Foundation Prior Assistance.</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Foundation Reinforcement Learning: towards Embodied Generalist Agents with Foundation Prior Assistance.</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="">Weirui Ye</a><sup>1 2 3</sup>,</span>
+            <span class="author-block">
+              <a href="">Yunsheng Zhang</a><sup>2 3</sup>,</span>
+            <span class="author-block">
+              <a href="">Mengchen Wang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href=" ">Shengjie Wang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Xianfan Gu</a><sup>2 3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Pieter Abbeel</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Yang Gao</a><sup>1 2 3</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Tsinghua University,</span>
+            <span class="author-block"><sup>2</sup>Shanghai Artificial Intelligence Laboratory,</span>
+            <span class="author-block"><sup>3</sup>Shanghai Qi Zhi Institute,</span>
+            <span class="author-block"><sup>4</sup>UC Berkeley</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+<!--              <span class="link-block">-->
+<!--                <a href="https://arxiv.org/abs/2310.02635"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="fas fa-file-pdf"></i>-->
+<!--                  </span>-->
+<!--                  <span>Paper</span>-->
+<!--                </a>-->
+<!--              </span>-->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2310.02635"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recently, people have shown that large-scale pre-training from diverse internet-scale data is the key
+            to building a generalist model, as witnessed in the natural language processing (NLP) area.
+            To build an embodied generalist agent, we, as well as many other researchers, hypothesize that such
+            foundation prior is also an indispensable component. However, it is unclear <i><u>what is the proper concrete
+            form we should represent those embodied foundation priors and how those priors should be used in the
+            downstream task</u></i>.
+          </p>
+          <p>
+            In this paper, we propose an intuitive and effective set of embodied priors that consist of foundation
+          policy, foundation value, and foundation success reward. The proposed priors are based on the
+          goal-conditioned Markov decision process formulation of the task. To verify the effectiveness of the proposed
+          priors, we instantiate an actor-critic method with the assistance of the priors, called Foundation
+          Actor-Critic (FAC). We name our framework as <b>Foundation Reinforcement Learning</b> (FRL), since our framework
+          completely relies on embodied foundation priors to explore, learn and reinforce.
+          </p>
+          <p>
+            The benefits of our framework are threefold. (1) <i>Sample efficient learning</i>. With the foundation prior,
+            FAC learns significantly faster than traditional RL. Our evaluation on the Meta-World has proved that FAC
+            can achieve 100% success rates for 7/8 tasks under less than 200k frames, which outperforms the baseline
+            method with careful manual-designed rewards under 1M frames. (2) <i>Robust to noisy priors</i>. Our method
+            tolerates the unavoidable noise in embodied foundation models. We have shown that FAC works well even under
+            heavy noise or quantization errors. (3) <i>Minimal human intervention</i>: FAC completely learns from the
+            foundation priors, without the need of human-specified dense reward, or providing teleoperated
+            demonstrations. Thus, FAC can be easily scaled up. We believe our FRL framework could enable the future
+            robot to autonomously explore and learn without human intervention in the physical world. In summary, our
+            proposed FRL framework is a novel and powerful learning paradigm, towards achieving an embodied generalist
+            agent.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe width="1280" height="721" src="https://www.youtube.com/embed/Zi1_menl8C4"
+                  title="Foundation RL: towards Embodied Generalist Agents with Foundation Prior Assistance"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="content">
+      <h2 class="title is-3">FAC on Meta-world</h2>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+        <ul style="display: table-row">
+          <li style="display: table-cell"><center>bin-picking-v2</center>
+          <video autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/bin-picking.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          </li>
+          <li style="display: table-cell"><center>button-press-topdown-v2</center>
+          <video autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/button-press-topdown.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          </li>
+          <li style="display: table-cell"><center>door-open-v2</center>
+          <video autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/door-open.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          </li>
+          <li style="display: table-cell"><center>door-unlock-v2</center>
+          <video autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/door-unlock.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          </li>
+        </ul>
+        </div>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+          <ul style="display: table-row">
+            <li style="display: table-cell"><center>drawer-close-v2</center>
+            <video autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/drawer-close.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </li>
+            <li style="display: table-cell"><center>drawer-open-v2</center>
+            <video autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/drawer-open.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </li>
+            <li style="display: table-cell"><center>hammer-v2</center>
+            <video autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/hammer.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </li>
+            <li style="display: table-cell"><center>window-close-v2</center>
+            <video autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/window-close.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </li>
+          </ul>
+          </div>
+    </div>
+    <div class="content">
+      <h2 class="title is-3">FAC is robust to noisy priors</h2>
+      <p>FAC can work well under <b>much noisier</b> policy prior: discretized the policy prior into {-1, 0, 1}; and use uniform
+        noise as policy prior action at 20% or 50% probability (<font color="purple">purple curve</font>).</p>
+        <img src="static/images/ablation-quality.png">
+    </div>
+
+    <div class="content">
+      <h2 class="title is-3">Video Generation of Conditioned Diffusion Models</h2>
+      <p>We fine-tuned the conditioned video diffusion model with 10 videos for each task.
+        There are 16 frames of the generated videos, as follows.</p>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+          <ul style="display: table-row">
+            <li style="display: table-cell"><center>bin-picking-v2: <b>pick the green bin from the red box to the table</b>.</center>
+              <img src="static/images/bin-picking.png">
+            </li>
+          </ul>
+        </div>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+          <ul style="display: table-row">
+            <li style="display: table-cell"><center>button-press-topdown-v2: <b>press down the red button with the red robotic arm</b>.</center>
+              <img src="static/images/button-press-topdown.png">
+            </li>
+          </ul>
+        </div>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+          <ul style="display: table-row">
+            <li style="display: table-cell"><center>door-open-v2: <b>open the door by turning the handle</b>.</center>
+              <img src="static/images/door-open.png">
+            </li>
+          </ul>
+        </div>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+          <ul style="display: table-row">
+            <li style="display: table-cell"><center>door-unlock-v2: <b>unlock the door with the red robotic arm</b>.</center>
+              <img src="static/images/door-unlock.png">
+            </li>
+          </ul>
+        </div>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+          <ul style="display: table-row">
+            <li style="display: table-cell"><center>drawer-close-v2: <b>close the green drawer with the red robotic arm</b>.</center>
+              <img src="static/images/drawer-close.png">
+            </li>
+          </ul>
+        </div>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+          <ul style="display: table-row">
+            <li style="display: table-cell"><center>drawer-open-v2: <b>open the green drawer with the red robotic arm</b>.</center>
+              <img src="static/images/drawer-open.png">
+            </li>
+          </ul>
+        </div>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+          <ul style="display: table-row">
+            <li style="display: table-cell"><center>hammer-v2: <b>pushing the nail into the wall by the hammer</b>.</center>
+              <img src="static/images/hammer.png">
+            </li>
+          </ul>
+        </div>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+          <ul style="display: table-row">
+            <li style="display: table-cell"><center>window-close-v2: <b>close the window with red robotic arm</b>.</center>
+              <img src="static/images/window-close.png">
+            </li>
+          </ul>
+        </div>
+    </div>
+
+    <div class="content">
+      <h2 class="title is-3">Distilled Policy on Meta-world</h2>
+      <p>We distill a policy prior model from the diffusion model and a trained inverse dynamics model from DrQ-v2
+        replay buffer. Steps: (1) we generate 1000 videos from the diffusion model for bin-picking-v2 and 100 videos for
+        the others; (2) use the inverse dynamics model to label actions for the videos; (3) train a policy prior model
+        from the labelled dataset by supervised training.
+      </p>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+        <ul style="display: table-row">
+          <li style="display: table-cell"><center>bin-picking-v2</center>
+          <video autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/prior/bin-picking.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          </li>
+          <li style="display: table-cell"><center>button-press-topdown-v2</center>
+          <video autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/prior/button-press-topdown.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          </li>
+          <li style="display: table-cell"><center>door-open-v2</center>
+          <video autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/prior/door-open.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          </li>
+          <li style="display: table-cell"><center>door-unlock-v2</center>
+          <video autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/prior/door-unlock.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          </li>
+        </ul>
+        </div>
+        <div class="t" style="display: table; width: 100%; height: auto;">
+          <ul style="display: table-row">
+            <li style="display: table-cell"><center>drawer-close-v2</center>
+            <video autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/prior/drawer-close.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </li>
+            <li style="display: table-cell"><center>drawer-open-v2</center>
+            <video autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/prior/drawer-open.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </li>
+            <li style="display: table-cell"><center>hammer-v2</center>
+            <video autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/prior/hammer.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </li>
+            <li style="display: table-cell"><center>window-close-v2</center>
+            <video autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/prior/window-close.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </li>
+          </ul>
+          </div>
+    </div>
+
+    <!-- Related Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Source</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            The baseline actor-critic method is <a href="https://github.com/facebookresearch/drqv2">DrQ-v2</a>;
+            the value prior model is acquired from <a href="https://sites.google.com/view/vip-rl">VIP</a>;
+            the policy prior model is following <a href="https://sites.google.com/view/vip-rl">UniPi</a>;
+            the conditioned video diffusion model is acquired from <a href="https://seervideodiffusion.github.io/">Seer</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Related Work. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{ye2023foundation,
+      title={Foundation Reinforcement Learning: towards Embodied Generalist Agents with Foundation Prior Assistance},
+      author={Weirui Ye and Yunsheng Zhang and Mengchen Wang and Shengjie Wang and Xianfan Gu and Pieter Abbeel and Yang Gao},
+      year={2023},
+      eprint={2310.02635},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/pdf/2310.02635.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/YeWR" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Thanks to the <a href="https://github.com/nerfies/nerfies.github.io">source code</a>. Free to borrow
+            the source code, but link it back in the footer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
