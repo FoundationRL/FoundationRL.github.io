@@ -49,23 +49,23 @@
           <h1 class="title is-1 publication-title">Foundation Reinforcement Learning: towards Embodied Generalist Agents with Foundation Prior Assistance.</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="">Weirui Ye</a><sup>1 2 3</sup>,</span>
+              <a href="https://yewr.github.io/">Weirui Ye</a><sup>1 2 3</sup>,</span>
             <span class="author-block">
-              <a href="">Yunsheng Zhang</a><sup>2 3</sup>,</span>
+              <a href="https://isa233.github.io/">Yunsheng Zhang</a><sup>2 3</sup>,</span>
             <span class="author-block">
-              <a href="">Mengchen Wang</a><sup>1</sup>,
+              <a href="https://github.com/fjlafafa">Mengchen Wang</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href=" ">Shengjie Wang</a><sup>1</sup>,
+              <a href="https://shengjiewang-jason.github.io/">Shengjie Wang</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="">Xianfan Gu</a><sup>2 3</sup>,
+              <a href="https://xianfangu.github.io/">Xianfan Gu</a><sup>2 3</sup>,
             </span>
             <span class="author-block">
-              <a href="">Pieter Abbeel</a><sup>4</sup>,
+              <a href="https://people.eecs.berkeley.edu/~pabbeel/">Pieter Abbeel</a><sup>4</sup>,
             </span>
             <span class="author-block">
-              <a href="">Yang Gao</a><sup>1 2 3</sup>
+              <a href="https://yang-gao.weebly.com/">Yang Gao</a><sup>1 2 3</sup>
             </span>
           </div>
 
@@ -169,6 +169,14 @@
 
     <div class="content">
       <h2 class="title is-3">FAC on Meta-world</h2>
+      <p> The proposed Foundation Actor-Critic (FAC) is built upon DrQ-v2. We conduct experiments of FAC on 8 tasks from simulated robotics environments Meta-World.</p>
+      <p> (1) <b>Minual human intervention</b>: FAC can learn efficiently through interactions with the environment without manual-designed reward, under the guidance of the
+        value/policy/success-reward prior knowledge.</p>
+      <p> (2) <b>Sample efficient learning</b>: FAC achieves <b>100%</b> success rates for all the tasks. 7/8 of them require less than <b>200k</b> frames except for
+        bin-picking-v2. Moreover, it outperforms the baseline method with manual-designed rewards in both success rates and sample efficiency.</p>
+      <h5> Curves of results</h5>
+      <img src="static/images/full_results.png">
+      <h5> Video demos </h5>
         <div class="t" style="display: table; width: 100%; height: auto;">
         <ul style="display: table-row">
           <li style="display: table-cell"><center>bin-picking-v2</center>
@@ -228,15 +236,21 @@
     </div>
     <div class="content">
       <h2 class="title is-3">FAC is robust to noisy priors</h2>
-      <p>FAC can work well under <b>much noisier</b> policy prior: discretized the policy prior into {-1, 0, 1}; and use uniform
-        noise as policy prior action at 20% or 50% probability (<font color="purple">purple curve</font>).</p>
+      <p> FAC can work well under <b>much noisier</b> policy prior (<font color="purple">purple curve</font>):</p>
+      <p> (1) We discretized the policy prior into {-1, 0, 1}, which makes the policy prior only contain rough directional information.</p>
+      <p> (2) Under the discretized policy prior, we use uniform noise as policy prior action at 20% or 50% probability. </p>
+      <p> Using the discretized policy with 50% noise, FAC can still reach 100% success rates in many environments.
+        The results indicate that our proposed FAC is robust to the quality of the foundation prior.
+        Moreover, the better the foundation prior is, the more sample efficient the FAC is.</p>
         <img src="static/images/ablation-quality.png">
     </div>
 
     <div class="content">
       <h2 class="title is-3">Video Generation of Conditioned Diffusion Models</h2>
       <p>We fine-tuned the conditioned video diffusion model with 10 videos for each task.
-        There are 16 frames of the generated videos, as follows.</p>
+        There are 16 frames of the generated videos, as follows. Under the limited fine-tuned data, the generated video
+        frames are not clear, so that the distilled policy prior is not well.
+        However, our FAC can work efficiently under such poor policy prior. </p>
         <div class="t" style="display: table; width: 100%; height: auto;">
           <ul style="display: table-row">
             <li style="display: table-cell"><center>bin-picking-v2: <b>pick the green bin from the red box to the table</b>.</center>
@@ -297,10 +311,12 @@
 
     <div class="content">
       <h2 class="title is-3">Distilled Policy on Meta-world</h2>
-      <p>We distill a policy prior model from the diffusion model and a trained inverse dynamics model from DrQ-v2
-        replay buffer. Steps: (1) we generate 1000 videos from the diffusion model for bin-picking-v2 and 100 videos for
-        the others; (2) use the inverse dynamics model to label actions for the videos; (3) train a policy prior model
-        from the labelled dataset by supervised training.
+      <p> We distill a policy prior model from the diffusion model and a trained inverse dynamics model from DrQ-v2
+        replay buffer. Steps are as follows:</p>
+      <p> (1) we generate 1000 videos from the diffusion model for bin-picking-v2 and 100 videos for
+        the others; </p>
+      <p> (2) use the inverse dynamics model to label actions for the videos; </p>
+      <p>(3) train a policy prior model from the labelled dataset by supervised training.
       </p>
         <div class="t" style="display: table; width: 100%; height: auto;">
         <ul style="display: table-row">
@@ -369,7 +385,7 @@
           <p>
             The baseline actor-critic method is <a href="https://github.com/facebookresearch/drqv2">DrQ-v2</a>;
             the value prior model is acquired from <a href="https://sites.google.com/view/vip-rl">VIP</a>;
-            the policy prior model is following <a href="https://sites.google.com/view/vip-rl">UniPi</a>;
+            the policy prior model is following <a href="https://universal-policy.github.io/unipi/">UniPi</a>;
             the conditioned video diffusion model is acquired from <a href="https://seervideodiffusion.github.io/">Seer</a>.
           </p>
         </div>
@@ -398,26 +414,10 @@
 
 <footer class="footer">
   <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="https://arxiv.org/pdf/2310.02635.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/YeWR" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            Thanks to the <a href="https://github.com/nerfies/nerfies.github.io">source code</a>. Free to borrow
-            the source code, but link it back in the footer.
+          <p><center>This website is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.</center>
           </p>
         </div>
       </div>
